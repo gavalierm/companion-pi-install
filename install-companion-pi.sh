@@ -51,12 +51,10 @@ eval "`fnm env --shell bash`"
 
 # clone the companionpi repository
 rm -rf /usr/local/src/companionpi
+sleep 1
 git clone https://github.com/bitfocus/companion-pi.git -b $GIT_MAIN /usr/local/src/companionpi
-
-
+sleep 1
 cd /usr/local/src/companionpi
-
-ls
 
 # configure git for future updates
 git config --global pull.rebase false
@@ -65,6 +63,7 @@ git config --global pull.rebase false
 git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
 
 # run the update script
+cd /usr/local/src/companionpi
 ./update.sh $GIT_MASTER
 
 # install update script dependencies, as they were ignored
