@@ -8,7 +8,6 @@ if [ "$(whoami)" != "root" ]; then
 fi
 
 DST_PATH="/usr/local/src/companionpi"
-DST_PATH="companion-pi"
 
 #remove local changes
 #git stash
