@@ -83,10 +83,6 @@ fi
 # run the update script
 ./update.sh $GIT_MASTER #without leak the memory
 
-# run the update script
-git stash #get rid of my leak fix
-./update.sh $GIT_MASTER #is updated already only checking
-
 # install update script dependencies, as they were ignored
 yarn --cwd "/usr/local/src/companionpi/update-prompt" install
 
@@ -105,6 +101,8 @@ else
 fi
 
 #su $COMPANION_USER -c 'echo "export PATH=/opt/fnm/aliases/default/bin:$PATH" >> ~/.bashrc'
+
+git stash #get rid of my leak fix
 
 service companion status
 
