@@ -58,9 +58,7 @@ cd /usr/local/src/companionpi
 git config --global pull.rebase false
 
 # revert back to the 2.4.2
-git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
-
-mkdir /usr/local/src/companion
+#git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
 
 # run the update script
 ./update.sh $GIT_MASTER
