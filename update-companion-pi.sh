@@ -12,9 +12,9 @@ apt-get update
 #run update
 companion-update
 
-echo "++++++++++++++++++++++++++";
-echo "It fails right? This is expected";
-echo "++++++++++++++++++++++++++";
+echo "++++++++++++++++++++++++++++++++++++++++++++++++++++";
+echo "         It fails right? This is expected";
+echo "++++++++++++++++++++++++++++++++++++++++++++++++++++";
 sleep 2
 
 DST_PATH="/usr/local/src/companionpi"
