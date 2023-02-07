@@ -24,7 +24,10 @@ else
       sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t$HOSTNAME/g" /etc/hosts
 fi
 # add a system user
-adduser --disabled-password $COMPANION_USER --gecos ""
+if ! id -u "$COMPANION_USER" >/dev/null 2>&1; then
+    echo "$COMPANION_USER user missing"
+    adduser --disabled-password $COMPANION_USER --gecos ""
+fi
 
 # install some dependencies
 apt-get update
