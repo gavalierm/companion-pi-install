@@ -9,7 +9,7 @@ fi
 
 GIT_MASTER="master"
 GIT_MAIN="main" #strange movement from master to main following official instalation process
-HOSTNAME="atemrpi" # empty for skip or what ever you like used for access via domain hostname.local instead of ip
+HOSTNAME="" # empty for skip or what ever you like used for access via domain hostname.local instead of ip
 COMPANION_USER="companion" #maybe yoo use 'pi' but i recommend to use separate user for future auto updates by companion update feature
 
 # enable ssh just in case
