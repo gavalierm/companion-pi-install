@@ -1,3 +1,6 @@
 [submodule "companion-pi"]
 	path = companion-pi
 	url = git@github.com:bitfocus/companion-pi.git
+[submodule "companion"]
+	path = companion
+	url = git@github.com:bitfocus/companion.git

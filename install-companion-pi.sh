@@ -49,16 +49,23 @@ eval "`fnm env --shell bash`"
 
 #source /root/.bashrc
 
+# FOR v242, in v3 this will be merged into one repo?
+# clone the companion repository
+rm -rf /usr/local/src/companion
+git clone https://github.com/bitfocus/companion.git -b $GIT_MASTER /usr/local/src/companion
+cd /usr/local/src/companion
+# configure git for future updates
+git config --global pull.rebase false
+
 # clone the companionpi repository
 rm -rf /usr/local/src/companionpi
 git clone https://github.com/bitfocus/companion-pi.git -b $GIT_MAIN /usr/local/src/companionpi
 cd /usr/local/src/companionpi
-
 # configure git for future updates
 git config --global pull.rebase false
 
 # revert back to the 2.4.2
-#git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
+git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
 
 # run the update script
 ./update.sh $GIT_MASTER
@@ -75,8 +82,6 @@ PATH_FNM="export PATH=/opt/fnm/aliases/default/bin:\$PATH"
 
 if grep -Fxq "$PATH_FNM" "/home/$COMPANION_USER/.bashrc"; then
     # code if found
-    #su $COMPANION_USER -c "sed -i \"s/$PATH_FNM/$PATH_FNM/g\" ~/.bashrc"
-    echo "Path found"
 else
     # code if not found
     echo "export PATH=/opt/fnm/aliases/default/bin:\$PATH" >> /home/$COMPANION_USER/.bashrc
