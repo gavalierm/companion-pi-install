@@ -7,8 +7,8 @@ if [ "$(whoami)" != "root" ]; then
      # elevate script privileges
 fi
 
-UPDATE_BRANCH="master"
-GIT_BRANCHE="main"
+GIT_MASTER="master"
+GIT_MAIN="main"
 HOSTNAME="atemrpi"
 COMPANION_USER="companion"
 
@@ -41,7 +41,7 @@ export PATH=/opt/fnm:$PATH
 eval "`fnm env --shell bash`"
 
 # clone the companionpi repository
-git clone https://github.com/bitfocus/companion-pi.git -b $GIT_BRANCHE /usr/local/src/companionpi
+git clone https://github.com/bitfocus/companion-pi.git -b $GIT_MAIN /usr/local/src/companionpi
 cd /usr/local/src/companionpi
 
 # configure git for future updates
@@ -51,7 +51,7 @@ git config --global pull.rebase false
 git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
 
 # run the update script
-./update.sh $UPDATE_BRANCH
+./update.sh $GIT_MASTER
 
 # install update script dependencies, as they were ignored
 yarn --cwd "/usr/local/src/companionpi/update-prompt" install
@@ -61,4 +61,18 @@ systemctl enable companion
 
 # run as companion user
 # add the fnm node to this users path
-su $COMPANION_USER -c 'echo "export PATH=/opt/fnm/aliases/default/bin:\\$PATH" >> ~/.bashrc'
+PATH_FNM="export PATH=/opt/fnm/aliases/default/bin:\$PATH"
+
+if grep -Fxq "$PATH_FNM" "/home/$COMPANION_USER/.bashrc"
+then
+    # code if found
+    #su $COMPANION_USER -c "sed -i \"s/$PATH_FNM/$PATH_FNM/g\" ~/.bashrc"
+    echo "Path found"
+else
+    # code if not found
+    echo "export PATH=/opt/fnm/aliases/default/bin:\$PATH" >> /home/$COMPANION_USER/.bashrc
+fi
+
+#su $COMPANION_USER -c 'echo "export PATH=/opt/fnm/aliases/default/bin:$PATH" >> ~/.bashrc'
+
+echo "Done. Please reboot"
