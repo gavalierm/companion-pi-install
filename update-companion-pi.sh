@@ -9,14 +9,14 @@ fi
 
 DST_PATH="/usr/local/src/companionpi"
 
+cd $DST_PATH
 #remove local changes
-#git stash
-
+git stash
 #run update
-#companion-update
+companion-update
 
 echo "++++++++++++++++++++++++++";
-echo "It fails? This is expected";
+echo "It fails right? This is expected";
 echo "++++++++++++++++++++++++++";
 sleep 3
 # run as companion user
@@ -30,3 +30,5 @@ if grep -Fxq "$LINE_A" "$DST_PATH/update.sh"; then
      # code if found
      sed -i "s/$LINE_A/$LINE_B/g" $DST_PATH/update.sh
 fi
+
+companion-update
