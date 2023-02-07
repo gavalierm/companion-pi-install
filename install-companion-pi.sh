@@ -47,7 +47,7 @@ curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir /opt/fnm
 export PATH=/opt/fnm:$PATH
 eval "`fnm env --shell bash`"
 
-source /root/.bashrc
+. /root/.bashrc #dot means source
 
 # clone the companionpi repository
 rm -rf /usr/local/src/companionpi
