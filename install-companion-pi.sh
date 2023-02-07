@@ -35,7 +35,8 @@ fi
 apt-get update
 #apt-get upgrade --without-new-pkgs
 #apt-get full-upgrade
-apt-get install -y -f git unzip curl libusb-1.0-0-dev libudev-dev cmake
+apt-get install -y -f vim git unzip curl libusb-1.0-0-dev libudev-dev cmake
+
 apt-get clean
 
 # run as root
@@ -97,12 +98,11 @@ PATH_FNM="export PATH=/opt/fnm/aliases/default/bin:\$PATH"
 
 if grep -Fxq "$PATH_FNM" "/home/$COMPANION_USER/.bashrc"; then
     # code if found
+    echo "Path is already defined"
 else
     # code if not found
     echo "export PATH=/opt/fnm/aliases/default/bin:\$PATH" >> /home/$COMPANION_USER/.bashrc
 fi
-
-#su $COMPANION_USER -c 'echo "export PATH=/opt/fnm/aliases/default/bin:$PATH" >> ~/.bashrc'
 
 git stash #get rid of my leak fix
 
