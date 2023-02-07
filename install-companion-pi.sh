@@ -52,7 +52,11 @@ eval "`fnm env --shell bash`"
 # clone the companionpi repository
 rm -rf /usr/local/src/companionpi
 git clone https://github.com/bitfocus/companion-pi.git -b $GIT_MAIN /usr/local/src/companionpi
+
+
 cd /usr/local/src/companionpi
+
+ls
 
 # configure git for future updates
 git config --global pull.rebase false
