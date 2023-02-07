@@ -7,6 +7,8 @@ if [ "$(whoami)" != "root" ]; then
      # elevate script privileges
 fi
 
+apt-get update
+
 DST_PATH="/usr/local/src/companionpi"
 
 cd $DST_PATH
