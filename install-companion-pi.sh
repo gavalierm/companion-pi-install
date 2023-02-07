@@ -67,8 +67,23 @@ git config --global pull.rebase false
 # revert back to the 2.4.2
 git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
 
+#update leak memory so i need do some teaks
+LINE_A="    export NODE_OPTIONS=--max-old-space-size=8192 # some pi's run out of memory"
+LINE_B="    #export NODE_OPTIONS=--max-old-space-size=8192 # some pi's run out of memory #GAVO"
+
+if grep -Fxq "$LINE_A" update.sh; then
+     cp update.sh ~/update_bak.sh
+     # code if found
+     sed -i "s/$LINE_A/$LINE_B/g" update.sh
+      echo "Leak handled"
+fi
+
 # run the update script
-./update.sh $GIT_MASTER
+./update.sh $GIT_MASTER #without leak the memory
+
+# run the update script
+git stash #get rid of my leak fix
+./update.sh $GIT_MASTER #is updated already only checking
 
 # install update script dependencies, as they were ignored
 yarn --cwd "/usr/local/src/companionpi/update-prompt" install
