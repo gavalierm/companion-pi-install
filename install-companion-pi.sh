@@ -8,25 +8,28 @@ if [ "$(whoami)" != "root" ]; then
 fi
 
 GIT_MASTER="master"
-GIT_MAIN="main"
-HOSTNAME="atemrpi"
-COMPANION_USER="companion"
+GIT_MAIN="main" #strange movement from master to main following official instalation process
+HOSTNAME="atemrpi" # empty for skip or what ever you like used for access via domain hostname.local instead of ip
+COMPANION_USER="companion" #maybe yoo use 'pi' but i recommend to use separate user for future auto updates by companion update feature
 
-# enable ssh
+# enable ssh just in case
 touch /boot/ssh
 
 # change the hostname
-CURRENT_HOSTNAME=`cat /etc/hostname | tr -d " \t\n\r"`
-echo $HOSTNAME > /etc/hostname
-sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t$HOSTNAME/g" /etc/hosts
-
+if [ -z "$HOSTNAME" ]; then
+      echo "Skip hostname"
+else
+      CURRENT_HOSTNAME=`cat /etc/hostname | tr -d " \t\n\r"`
+      echo $HOSTNAME > /etc/hostname
+      sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t$HOSTNAME/g" /etc/hosts
+fi
 # add a system user
 adduser --disabled-password $COMPANION_USER --gecos ""
 
 # install some dependencies
 apt-get update
 apt-get full-upgrade
-apt-get install -y git unzip curl libusb-1.0-0-dev libudev-dev cmake
+apt-get install -y yarn git unzip curl libusb-1.0-0-dev libudev-dev cmake
 apt-get clean
 
 # run as root
@@ -63,8 +66,7 @@ systemctl enable companion
 # add the fnm node to this users path
 PATH_FNM="export PATH=/opt/fnm/aliases/default/bin:\$PATH"
 
-if grep -Fxq "$PATH_FNM" "/home/$COMPANION_USER/.bashrc"
-then
+if grep -Fxq "$PATH_FNM" "/home/$COMPANION_USER/.bashrc"; then
     # code if found
     #su $COMPANION_USER -c "sed -i \"s/$PATH_FNM/$PATH_FNM/g\" ~/.bashrc"
     echo "Path found"
