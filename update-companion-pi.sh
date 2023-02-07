@@ -9,18 +9,23 @@ fi
 
 apt-get update
 
-DST_PATH="/usr/local/src/companionpi"
-
-cd $DST_PATH
-#remove local changes
-git stash
 #run update
 companion-update
 
 echo "++++++++++++++++++++++++++";
 echo "It fails right? This is expected";
 echo "++++++++++++++++++++++++++";
-sleep 3
+sleep 2
+
+DST_PATH="/usr/local/src/companionpi"
+
+cd $DST_PATH
+
+git stash
+
+# revert back to the 2.4.2
+#git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
+
 # run as companion user
 # add the fnm node to this users path
 LINE_A="    export NODE_OPTIONS=--max-old-space-size=8192 # some pi's run out of memory"
