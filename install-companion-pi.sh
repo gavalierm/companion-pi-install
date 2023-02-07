@@ -7,6 +7,8 @@ if [ "$(whoami)" != "root" ]; then
      # elevate script privileges
 fi
 
+git config pull.rebase false
+
 GIT_MASTER="master"
 GIT_MAIN="main" #strange movement from master to main following official instalation process
 HOSTNAME="" # empty for skip or what ever you like used for access via domain hostname.local instead of ip
