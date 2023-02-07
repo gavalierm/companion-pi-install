@@ -33,7 +33,7 @@ fi
 apt-get update
 #apt-get upgrade --without-new-pkgs
 #apt-get full-upgrade
-apt-get install -y yarn git unzip curl libusb-1.0-0-dev libudev-dev cmake
+apt-get install -y nodejs yarn git unzip curl libusb-1.0-0-dev libudev-dev cmake
 apt-get clean
 
 # run as root
