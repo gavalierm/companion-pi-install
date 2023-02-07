@@ -33,7 +33,7 @@ fi
 apt-get update
 #apt-get upgrade --without-new-pkgs
 #apt-get full-upgrade
-apt-get install -y nodejs yarn git unzip curl libusb-1.0-0-dev libudev-dev cmake
+apt-get install -y git unzip curl libusb-1.0-0-dev libudev-dev cmake
 apt-get clean
 
 # run as root
@@ -57,6 +57,8 @@ cd /usr/local/src/companion
 # configure git for future updates
 git config --global pull.rebase false
 
+git reset --hard fcb5a863470470bf8d27e2b1a8afd628b358dd03 #companion
+
 # clone the companionpi repository
 rm -rf /usr/local/src/companionpi
 git clone https://github.com/bitfocus/companion-pi.git -b $GIT_MAIN /usr/local/src/companionpi
@@ -65,7 +67,7 @@ cd /usr/local/src/companionpi
 git config --global pull.rebase false
 
 # revert back to the 2.4.2
-git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf
+git reset --hard dd11d9c466d1fab8ff0a50f12af72fa1e4b8cfdf #pi
 
 #update leak memory so i need do some teaks
 LINE_A="    export NODE_OPTIONS=--max-old-space-size=8192 # some pi's run out of memory"
@@ -103,5 +105,7 @@ else
 fi
 
 #su $COMPANION_USER -c 'echo "export PATH=/opt/fnm/aliases/default/bin:$PATH" >> ~/.bashrc'
+
+service companion status
 
 echo "Done. Please reboot"
