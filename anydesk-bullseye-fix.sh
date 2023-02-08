@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#https://www.youtube.com/watch?v=v7gHA-Laf4k
+#https://download.anydesk.com/rpi/anydesk_6.2.1-1_armhf.deb
+
 set -e
 
 if [ "$(whoami)" != "root" ]; then
